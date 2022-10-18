@@ -10,15 +10,25 @@ import { useAppSelector } from '../hooks/redux-hooks'
 const { Header, Content } = Layout
 
 function App() {
-	const cartCount = useAppSelector(state => state.cart.items.length)
+	const totalPrice = useAppSelector(state => state.cart.totalPrice)
 
 	return (
 		<div className='App'>
 			<Layout className='layout'>
 				<Header>
-					<NavLink to='/cart'>
-						<Button type='primary'>Cart {cartCount}</Button>
-					</NavLink>
+					<div
+						style={{
+							display: 'flex',
+							justifyContent: 'flex-end',
+							columnGap: '20px',
+						}}
+					>
+						<NavLink to='/cart'>
+							<Button type='primary'>
+								Cart {totalPrice ? totalPrice + '₽' : ''}
+							</Button>
+						</NavLink>
+					</div>
 				</Header>
 				<Content style={{ padding: '50px', background: '#fff' }}>
 					<Routes>

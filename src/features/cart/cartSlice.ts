@@ -5,6 +5,7 @@ import { Product } from '../productsList/productsSlice'
 
 const initialState = {
 	items: [] as ItemCart[],
+	totalPrice: 0,
 }
 
 const cartSlice = createSlice({
@@ -14,14 +15,17 @@ const cartSlice = createSlice({
 		addItemCart(state, action: PayloadAction<Product>) {
 			if (state.items.length === 0) {
 				state.items.push({ ...action.payload, count: 0 })
+				state.totalPrice = state.totalPrice + action.payload.price
 			} else {
 				const index = state.items.findIndex(
 					item => item.id === action.payload.id
 				)
 				if (index > -1) {
 					state.items[index].count += 1
+					state.totalPrice = state.totalPrice + action.payload.price
 				} else {
 					state.items.push({ ...action.payload, count: 0 })
+					state.totalPrice = state.totalPrice + action.payload.price
 				}
 			}
 		},

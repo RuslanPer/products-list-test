@@ -31,14 +31,29 @@ export const ProductItem: React.FC<PropsType> = ({ product }) => {
 					/>
 				}
 			>
-				<Meta title={product.title} description={product.description} />
-				<Meta title={product.price + '₽'} />
-				<Button
-					onClick={addItemCartHandler}
-					type='primary'
-					shape='circle'
-					icon={<ShoppingCartOutlined />}
+				<Meta
+					style={{
+						height: '100px',
+					}}
+					title={product.title}
+					description={product.description}
 				/>
+				<div
+					style={{
+						display: 'flex',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+						marginTop: '20px',
+					}}
+				>
+					<Meta title={product.price + '₽'} />
+					<Button
+						onClick={addItemCartHandler}
+						type='primary'
+						shape='circle'
+						icon={<ShoppingCartOutlined />}
+					/>
+				</div>
 			</Card>
 		</Col>
 	)
