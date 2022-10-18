@@ -1,13 +1,9 @@
 import React, { useEffect } from 'react'
 
-import { db } from '../../firebase'
-import { onValue, ref } from 'firebase/database'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks'
 import { Row, Spin } from 'antd'
-import { fetchProducts, Product, setProducts } from './productsSlice'
+import { fetchProducts } from './productsSlice'
 import { ProductItem } from './productItem/ProductItem'
-import { Card } from 'antd'
-const { Meta } = Card
 
 export const ProductsList = () => {
 	const dispatch = useAppDispatch()
