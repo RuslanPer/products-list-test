@@ -1,6 +1,7 @@
 import React from 'react'
-import { ItemCart } from '../cartSlice'
+import { ItemCart, removeItemCart } from '../cartSlice'
 import { Card, Col, Row, Image, Typography, Button } from 'antd'
+import { useAppDispatch } from '../../../hooks/redux-hooks'
 
 const { Title, Text } = Typography
 
@@ -9,6 +10,12 @@ type PropsType = {
 }
 
 export const CartItem: React.FC<PropsType> = ({ item }) => {
+	const dispatch = useAppDispatch()
+
+	const removeItemCartHandler = () => {
+		dispatch(removeItemCart({ id: item.id }))
+	}
+
 	return (
 		<Card style={{ marginBottom: '15px', height: '175px' }}>
 			<Row gutter={16}>
@@ -33,7 +40,9 @@ export const CartItem: React.FC<PropsType> = ({ item }) => {
 						columnGap: '20px',
 					}}
 				>
-					<Button type='primary'>-</Button>
+					<Button type='primary' onClick={removeItemCartHandler}>
+						-
+					</Button>
 					<Title level={4} style={{ margin: '0' }}>
 						{item.count}
 					</Title>
