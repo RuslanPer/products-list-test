@@ -1,5 +1,5 @@
 import React from 'react'
-import { ItemCart, removeItemCart } from '../cartSlice'
+import { addItemCart, ItemCart, removeItemCart } from '../cartSlice'
 import { Card, Col, Row, Image, Typography, Button } from 'antd'
 import { useAppDispatch } from '../../../hooks/redux-hooks'
 
@@ -11,6 +11,10 @@ type PropsType = {
 
 export const CartItem: React.FC<PropsType> = ({ item }) => {
 	const dispatch = useAppDispatch()
+
+	const addItemCartHandler = () => {
+		dispatch(addItemCart(item))
+	}
 
 	const removeItemCartHandler = () => {
 		dispatch(removeItemCart({ id: item.id }))
@@ -46,7 +50,9 @@ export const CartItem: React.FC<PropsType> = ({ item }) => {
 					<Title level={4} style={{ margin: '0' }}>
 						{item.count}
 					</Title>
-					<Button type='primary'>+</Button>
+					<Button type='primary' onClick={addItemCartHandler}>
+						+
+					</Button>
 				</Col>
 			</Row>
 		</Card>
