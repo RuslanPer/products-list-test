@@ -14,7 +14,7 @@ const cartSlice = createSlice({
 	reducers: {
 		addItemCart(state, action: PayloadAction<Product>) {
 			if (state.items.length === 0) {
-				state.items.push({ ...action.payload, count: 0 })
+				state.items.push({ ...action.payload, count: 1 })
 				state.totalPrice = state.totalPrice + action.payload.price
 			} else {
 				const index = state.items.findIndex(
@@ -24,7 +24,7 @@ const cartSlice = createSlice({
 					state.items[index].count += 1
 					state.totalPrice = state.totalPrice + action.payload.price
 				} else {
-					state.items.push({ ...action.payload, count: 0 })
+					state.items.push({ ...action.payload, count: 1 })
 					state.totalPrice = state.totalPrice + action.payload.price
 				}
 			}
@@ -37,6 +37,6 @@ export const { addItemCart } = cartSlice.actions
 export default cartSlice.reducer
 
 // types
-type ItemCart = Product & {
+export type ItemCart = Product & {
 	count: number
 }
