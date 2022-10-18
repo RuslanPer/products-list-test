@@ -1,51 +1,40 @@
-import React, { useEffect, useState, ChangeEvent } from 'react'
-import {
-	EditOutlined,
-	EllipsisOutlined,
-	SettingOutlined,
-} from '@ant-design/icons'
-import { Avatar, Card, Skeleton, Switch } from 'antd'
-import { db } from '../../firebase'
-import { onValue, ref, set } from 'firebase/database'
+import React, { useEffect } from 'react'
 
+import { db } from '../../firebase'
+import { onValue, ref } from 'firebase/database'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks'
+import { Row, Spin } from 'antd'
+import { fetchProducts, Product, setProducts } from './productsSlice'
+import { ProductItem } from './productItem/ProductItem'
+import { Card } from 'antd'
 const { Meta } = Card
 
 export const ProductsList = () => {
-	const [products, setProducts] = useState<any>([])
+	const dispatch = useAppDispatch()
+	const products = useAppSelector(state => state.products.products)
 
 	useEffect(() => {
-		onValue(ref(db), snapshot => {
-			const data = snapshot.val()
-			if (data !== null) {
-				Object.values(data.products.items).map(pr => {
-					setProducts((oldArray: any) => [...oldArray, pr])
-				})
-			}
-		})
+		dispatch(fetchProducts())
 	}, [])
 
-	console.log(products)
+	if (!products)
+		return (
+			<Spin
+				size='large'
+				style={{
+					height: '50vh',
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+				}}
+			/>
+		)
 
 	return (
-		<div>
-			{products.map((pr: any) => (
-				<Card
-					style={{ width: 300, marginTop: 16 }}
-					loading={false}
-					cover={<img alt='example' src={pr.imageURL} />}
-					actions={[
-						<SettingOutlined key='setting' />,
-						<EditOutlined key='edit' />,
-						<EllipsisOutlined key='ellipsis' />,
-					]}
-				>
-					<Meta
-						avatar={<Avatar src='https://joeschmoe.io/api/v1/random' />}
-						title={pr.title}
-						description={pr.description}
-					/>
-				</Card>
+		<Row gutter={[16, 16]}>
+			{products.map((pr, i) => (
+				<ProductItem key={pr.id + i} product={pr} />
 			))}
-		</div>
+		</Row>
 	)
 }
