@@ -1,11 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Product } from '../productsList/productsSlice'
 
-// thunk
+const itemsLS = localStorage.getItem('cartItems')
+	? JSON.parse(localStorage.getItem('cartItems') as string)
+	: []
+
+const totalPriceLS = localStorage.getItem('totalPrice')
+	? JSON.parse(localStorage.getItem('totalPrice') as string)
+	: 0
 
 const initialState = {
-	items: [] as ItemCart[],
-	totalPrice: 0,
+	items: itemsLS as ItemCart[],
+	totalPrice: totalPriceLS,
 }
 
 const cartSlice = createSlice({
@@ -28,6 +34,12 @@ const cartSlice = createSlice({
 					state.totalPrice = state.totalPrice + action.payload.price
 				}
 			}
+
+			localStorage.setItem(
+				'cartItems',
+				JSON.stringify(state.items.map(item => item))
+			)
+			localStorage.setItem('totalPrice', JSON.stringify(state.totalPrice))
 		},
 		removeItemCart(state, action: PayloadAction<{ id: number }>) {
 			const index = state.items.findIndex(item => item.id === action.payload.id)
@@ -40,6 +52,12 @@ const cartSlice = createSlice({
 					state.items.splice(index, 1)
 				}
 			}
+
+			localStorage.setItem(
+				'cartItems',
+				JSON.stringify(state.items.map(item => item))
+			)
+			localStorage.setItem('totalPrice', JSON.stringify(state.totalPrice))
 		},
 	},
 })

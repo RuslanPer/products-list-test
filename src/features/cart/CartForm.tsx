@@ -23,7 +23,7 @@ export const CartForm: React.FC<PropsType> = ({ disabled }) => {
 		}
 
 		alert('Your order has been placed')
-		console.log(order)
+		console.log(JSON.stringify(order))
 	}
 
 	const onFinishFailed = (errorInfo: any) => {
