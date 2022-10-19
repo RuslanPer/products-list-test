@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Product } from '../productsList/productsSlice'
+import { Product } from './productsSlice'
 
 const itemsLS = localStorage.getItem('cartItems')
 	? JSON.parse(localStorage.getItem('cartItems') as string)

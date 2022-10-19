@@ -1,7 +1,7 @@
 import React from 'react'
-import { addItemCart, ItemCart, removeItemCart } from '../cartSlice'
+import { addItemCart, ItemCart, removeItemCart } from '../../store/cartSlice'
 import { Card, Col, Row, Image, Typography, Button } from 'antd'
-import { useAppDispatch } from '../../../hooks/redux-hooks'
+import { useAppDispatch } from '../../hooks/redux-hooks'
 
 const { Title, Text } = Typography
 

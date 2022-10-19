@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button, Card, Col, Image } from 'antd'
-import { Product } from '../productsSlice'
+import { Product } from '../../store/productsSlice'
 import { ShoppingCartOutlined } from '@ant-design/icons'
-import { useAppDispatch } from '../../../hooks/redux-hooks'
-import { addItemCart } from '../../cart/cartSlice'
+import { useAppDispatch } from '../../hooks/redux-hooks'
+import { addItemCart } from '../../store/cartSlice'
 const { Meta } = Card
 
 type PropsType = {

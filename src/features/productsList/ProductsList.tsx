@@ -2,12 +2,13 @@ import React, { useEffect } from 'react'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks'
 import { Row, Spin } from 'antd'
-import { fetchProducts } from './productsSlice'
-import { ProductItem } from './productItem/ProductItem'
+import { fetchProducts } from '../../store/productsSlice'
+import { ProductItem } from './ProductItem'
+import { selectProducts } from '../../store/selectors'
 
 export const ProductsList = () => {
 	const dispatch = useAppDispatch()
-	const products = useAppSelector(state => state.products.products)
+	const products = useAppSelector(selectProducts)
 
 	useEffect(() => {
 		dispatch(fetchProducts())

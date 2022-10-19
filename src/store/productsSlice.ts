@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { onValue, ref } from 'firebase/database'
-import { db } from '../../firebase'
+import { db } from '../firebase'
 
 // thunk
 export const fetchProducts = createAsyncThunk(

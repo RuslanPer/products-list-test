@@ -2,14 +2,15 @@ import { Col, Row, Typography, PageHeader } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector } from '../../hooks/redux-hooks'
+import { selectCartItems, selectTotalPrice } from '../../store/selectors'
 import { CartForm } from './CartForm'
-import { CartItem } from './cartItem/CartItem'
+import { CartItem } from './CartItem'
 
 const { Title } = Typography
 
 export const Cart: React.FC = () => {
-	const cartItems = useAppSelector(state => state.cart.items)
-	const totalPrice = useAppSelector(state => state.cart.totalPrice)
+	const cartItems = useAppSelector(selectCartItems)
+	const totalPrice = useAppSelector(selectTotalPrice)
 
 	const navigate = useNavigate()
 
